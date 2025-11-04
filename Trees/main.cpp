@@ -5,11 +5,24 @@
 
 #include"Tree.h"
 
+#include<algorithm> 
+#include<fstream> 
+#include<list> 
+#include<vector> 
+
 int main()
 {
+	std::vector<int> vectorNums; 
+	std::list<int> listNums; 
+
+	listNums.sort(); 
+
+	//qsort()
+	//std::sort()
+	
+
 	//Level 0 node (root): 
 	BinaryTree binaryTree("Alice");
-
 
 	/*Level 1 nodes: */
 	auto pRoot = binaryTree.getPRoot(); //get address of parent for these new children
@@ -24,7 +37,7 @@ int main()
 	binaryTree.addNode("Darth", pBob); 
 	binaryTree.addNode("Eve", pBob);
 
-	binaryTree.find_withBFS("aslkadkafdklsafd"); //not present
-	//
+	auto pGibberish = binaryTree.find_withBFS("aslkadkafdklsafd"); //not present
+	
 }
 
