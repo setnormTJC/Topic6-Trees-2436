@@ -1,3 +1,4 @@
+#include "Tree.h"
 ///*NOTE: don't attempt to run this - just using as a "reference"*/
 ///*Also note - uncomment to fix the spacing on ASCII trees*/
 //
@@ -43,13 +44,13 @@
 //
 ///// <summary>
 ///// /// Generates this tree: 
-/////            A 
-////			* / \
-////		   * B   C
-////		  * / \   \
-//	   //* D   E   F
-////			\    
-////			 G	
+///            A 
+//			* / \
+//		   * B   C
+//		  * / \   \
+	   //* D   E   F
+//			\    
+//			 G	
 ///// </summary>
 ///// <returns></returns>
 //auto generateLevelOrderTree()
@@ -73,39 +74,50 @@
 //	return root;
 //}
 //
-//
-///// <summary>
-///// Generates: 
-/////              +
-////			 /      \
-////		    *        /
-////		   / \     /   \
-////	      a   b   -     e
-////			    /  \     
-////			   c    d       
-///// </summary>
-///// <returns></returns>
-//auto generateInorderTree()
-//{
-//	TreeNode<char>* otherTreeRoot = new TreeNode<char>('+');
-//
-//	//level 1:
-//	otherTreeRoot->left = new TreeNode<char>('*');
-//	otherTreeRoot->right = new TreeNode<char>('/');
-//
-//	//level 2: 
-//	otherTreeRoot->left->left = new TreeNode<char>('a');
-//	otherTreeRoot->left->right = new TreeNode<char>('b');
-//
-//	otherTreeRoot->right->left = new TreeNode<char>('-');
-//	otherTreeRoot->right->right = new TreeNode<char>('e');
-//
-//	//level 3:
-//	otherTreeRoot->right->left->left = new TreeNode<char>('c');
-//	otherTreeRoot->right->left->right = new TreeNode<char>('d');
-//
-//	return otherTreeRoot;
-//}
+
+/// <summary>
+/// Generates: 
+///              +
+//			 /      \
+//		    *        /
+//		   / \     /   \
+//	      a   b   -     e
+//			    /  \     
+//			   c    d       
+/// </summary>
+/// <returns></returns>
+BinaryTree generateInorderTree()
+{
+    BinaryTree tree("+");
+
+    // left subtree (*)
+    tree.addNode("*", tree.getPRoot());
+    
+    //left grandchildren of root: 
+    auto pTimes = tree.find_withBFS("*");//left child of root
+
+    tree.addNode("a", pTimes); //addNode adds to the left first, then the right 
+    tree.addNode("b", pTimes); 
+
+
+
+    // right subtree (/)
+    tree.addNode("/", tree.getPRoot());
+
+    auto pOver = tree.find_withBFS("/");
+
+    // children of '/'
+    tree.addNode("-", pOver);
+    tree.addNode("e", pOver);
+
+    // children of '-'
+    auto pMinus = tree.find_withBFS("-");
+    tree.addNode("c", pMinus);
+    tree.addNode("d", pMinus);
+
+    return tree;
+}
+
 //
 //
 ///// <summary>

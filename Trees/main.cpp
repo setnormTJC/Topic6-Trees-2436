@@ -9,35 +9,23 @@
 #include<fstream> 
 #include<list> 
 #include<vector> 
+#include "demos.h"
+#include "someTestTrees.h"
 
 int main()
 {
-	std::vector<int> vectorNums; 
-	std::list<int> listNums; 
+	//demoSimpleBinaryTreeAndBFS(); 
 
-	listNums.sort(); 
+	auto inorderTree = generateInorderTree(); 
+	std::string gibberishToSearchFor = "afdasdf"; //causes traversal of entire tree
 
-	//qsort()
-	//std::sort()
-	
+	//start the recursive search at the root (the "beginning" of the tree):
+	auto pRoot = inorderTree.getPRoot(); 
 
-	//Level 0 node (root): 
-	BinaryTree binaryTree("Alice");
+	//inorderTree.find(gibberishToSearchFor, pRoot);
 
-	/*Level 1 nodes: */
-	auto pRoot = binaryTree.getPRoot(); //get address of parent for these new children
+	//inorderTree.inorderTraverse(pRoot); 
 
-	binaryTree.addNode("Bob", pRoot); 
-	binaryTree.addNode("Carol", pRoot);
-
-	/*Level 2 nodes (only Bob will have children in this case)*/
-	auto pBob = binaryTree.find_withBFS("Bob");
-	//possible alternative to above: auto pBob = pRoot->pLeft (if pLeft is "exposed" to client)
-
-	binaryTree.addNode("Darth", pBob); 
-	binaryTree.addNode("Eve", pBob);
-
-	auto pGibberish = binaryTree.find_withBFS("aslkadkafdklsafd"); //not present
-	
+	inorderTree.nonrecursiveDFT(pRoot); 
 }
 

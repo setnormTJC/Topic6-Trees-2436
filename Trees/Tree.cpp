@@ -1,6 +1,7 @@
 #include "Tree.h"
 #include <iostream>
 #include <queue>
+#include<stack> 
 
 MyException::MyException(const std::string message, const std::string& filename, const int lineNumber)
 	:message(message), filename(filename), lineNumber(lineNumber)
@@ -61,6 +62,8 @@ void BinaryTree::addNode(const std::string& dataToAdd, BinaryTreeNode* pParent)
 
 BinaryTreeNode* BinaryTree::nonRecursiveFind(const std::string& dataToFind) const
 {
+	//AGAIN, this function is intended as a bit of a JOKE
+
 	//start the search at the root: 
 	if (pRoot->contents == dataToFind)
 	{
@@ -97,7 +100,8 @@ BinaryTreeNode* BinaryTree::find(const std::string& dataToFind, BinaryTreeNode* 
 	if (pCurrent == nullptr) return nullptr; //do NOT attempt to get `dataOfInterest` on nullptr!
 
 	/*OPTIONAL print (For algo visualization)*/
-	std::cout << "Visiting node containing: " << pCurrent->contents << "\n";
+	//std::cout << "Visiting node containing: " << pCurrent->contents << "\n";
+	std::cout << pCurrent->contents << " "; //use this for binary ARITHMETIC expression(s)
 	//base case:
 	if (pCurrent->contents == dataToFind) return pCurrent;
 
@@ -120,6 +124,35 @@ BinaryTreeNode* BinaryTree::find(const std::string& dataToFind, BinaryTreeNode* 
 	}
 }
 
+void BinaryTree::inorderTraverse(BinaryTreeNode* pCurrent) const
+{
+	if (pCurrent == nullptr) return; 
+	
+	inorderTraverse(pCurrent->pLeft); //go left
+	std::cout << pCurrent->contents << " "; //visit
+	inorderTraverse(pCurrent->pRight); 
+}
+
+void BinaryTree::nonrecursiveDFT(BinaryTreeNode* pCurrent) const
+{
+	if (pCurrent == nullptr) return; 
+
+	std::stack<BinaryTreeNode*> nodeStack; 
+	nodeStack.push(pCurrent); 
+
+	while (!nodeStack.empty())
+	{
+		auto top = nodeStack.top(); //copy top
+
+		nodeStack.pop();
+
+		std::cout << top->contents << " "; //visit
+		if (top->pRight != nullptr) nodeStack.push(top->pRight);
+		if (top->pLeft != nullptr) nodeStack.push(top->pLeft);
+		
+	}
+}
+
 BinaryTreeNode* BinaryTree::find_withBFS(const std::string& dataToFind) const
 {
 	//use a queue to hold all existing children nodes: 
@@ -134,7 +167,7 @@ BinaryTreeNode* BinaryTree::find_withBFS(const std::string& dataToFind) const
 		//get node at front: 
 		auto pCurrentParent = nodeQueue.front();
 
-		std::cout << "Visiting our dear friend: " << pCurrentParent->contents << "\n";
+		//std::cout << "Visiting our dear friend: " << pCurrentParent->contents << "\n";
 
 		//check if it contains the target value: 
 		if (pCurrentParent->contents == dataToFind) return pCurrentParent;

@@ -52,8 +52,20 @@ public:
 
 	/*NOTE: this does NOT work - just intended to demo the usefulness of recursion*/
 	BinaryTreeNode* nonRecursiveFind(const std::string& dataToFind) const;
-	/*a RECURSIVE function (more generally called "Depth-first search") @param pCurrent -> call with treeName.getPRoot()*/
+	
+	/*@brief also called "PRE-ORDER" traversal
+	...a RECURSIVE function (more generally called "Depth-first search") 
+	@param pCurrent -> call with treeName.getPRoot()*/
 	BinaryTreeNode* find(const std::string& dataToFind, BinaryTreeNode* pCurrent) const;
+
+	/*No "search" here - just "visit" all nodes in tree*/
+	void inorderTraverse(BinaryTreeNode* pCurrent) const; 
+
+	/*@brief Depth First Traversal - NOT recursive - uses a STACK instead (Tipton-approved, possibly)
+	*NOTE that this is "pre-order"
+	@param pCurrent -> generally the first call (from the client) will be using pRoot
+	*/
+	void nonrecursiveDFT(BinaryTreeNode* pCurrent) const;
 
 	/*BFS means BREADTH-first search (the recursive find is DEPTH-first search)*/
 	BinaryTreeNode* find_withBFS(const std::string& dataToFind) const;
@@ -70,6 +82,8 @@ public:
 	* @return a tree's "height" is the depth of the deepest node in the tree
 	*/
 	int getTreeHeight();
+
+
 
 };
 
