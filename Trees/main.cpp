@@ -7,17 +7,22 @@
 
 #include<algorithm> 
 #include<fstream> 
+
 #include<list> 
+#include<map> //lookup is O(log2(N)) -> O(1)
+#include<set>
 #include<vector> 
 #include "demos.h"
 #include "someTestTrees.h"
 
 int main()
 {
+
+
 	//demoSimpleBinaryTreeAndBFS(); 
 
 	auto inorderTree = generateInorderTree(); 
-	std::string gibberishToSearchFor = "afdasdf"; //causes traversal of entire tree
+	//std::string gibberishToSearchFor = "afdasdf"; //causes traversal of entire tree
 
 	//start the recursive search at the root (the "beginning" of the tree):
 	auto pRoot = inorderTree.getPRoot(); 

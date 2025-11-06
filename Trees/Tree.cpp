@@ -146,9 +146,9 @@ void BinaryTree::nonrecursiveDFT(BinaryTreeNode* pCurrent) const
 
 		nodeStack.pop();
 
-		std::cout << top->contents << " "; //visit
-		if (top->pRight != nullptr) nodeStack.push(top->pRight);
-		if (top->pLeft != nullptr) nodeStack.push(top->pLeft);
+		std::cout << top->contents << " "; //visit (N)
+		if (top->pRight != nullptr) nodeStack.push(top->pRight); //R
+		if (top->pLeft != nullptr) nodeStack.push(top->pLeft); //L
 		
 	}
 }
