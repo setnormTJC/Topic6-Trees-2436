@@ -23,3 +23,18 @@ void demoSimpleBinaryTreeAndBFS()
 	auto pGibberish = binaryTree.find_withBFS("aslkadkafdklsafd"); //not present
 
 }
+
+//void demoDepthFirstTraversal()
+//{
+//	auto inorderTree = generateInorderTree();
+//	//std::string gibberishToSearchFor = "afdasdf"; //causes traversal of entire tree
+//
+//	//start the recursive search at the root (the "beginning" of the tree):
+//	auto pRoot = inorderTree.getPRoot();
+//
+//	//inorderTree.find(gibberishToSearchFor, pRoot);
+//
+//	//inorderTree.inorderTraverse(pRoot); 
+//	//inorderTree.getNodeDepth("asfdasd",)
+//	inorderTree.nonrecursiveDFT(pRoot);
+//}

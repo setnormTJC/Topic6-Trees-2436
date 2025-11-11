@@ -9,28 +9,60 @@
 #include<fstream> 
 
 #include<list> 
-#include<map> //lookup is O(log2(N)) -> O(1)
+#include<map> //note that std::map is implemented using a TREE 
+#include<random> 
 #include<set>
 #include<vector> 
 #include "demos.h"
 #include "someTestTrees.h"
+#include"utils.h"
+#include "SelfBalancingTree.cpp"
 
 int main()
 {
-
-
+	
 	//demoSimpleBinaryTreeAndBFS(); 
+	//demoDepthFirstTraversal(); 
 
-	auto inorderTree = generateInorderTree(); 
-	//std::string gibberishToSearchFor = "afdasdf"; //causes traversal of entire tree
+	std::string filename = "popularWords.txt";
 
-	//start the recursive search at the root (the "beginning" of the tree):
-	auto pRoot = inorderTree.getPRoot(); 
+	auto words = getWordsInDictionaryFile(filename); 
 
-	//inorderTree.find(gibberishToSearchFor, pRoot);
+	BinarySearchTree SKEWEDbst(words[0]);
 
-	//inorderTree.inorderTraverse(pRoot); 
+	int numberOfWordsToAddToTree = 1'000; 
+	//for (int i = 1; i < words.size(); ++i)
+	auto pRootSKEWED = SKEWEDbst.getPRoot(); 
 
-	inorderTree.nonrecursiveDFT(pRoot); 
+	for (int i = 1; i < numberOfWordsToAddToTree; ++i)
+	{
+		SKEWEDbst.addBSTNode(words[i], pRootSKEWED);
+	}
+
+	//now shuffle the words and create a (more) balanced binary search tree: 
+	std::mt19937 rng(std::random_device{}());
+
+	std::shuffle(words.begin(), words.end(), rng); 
+	//std::random_shuffle(words.begin(), words.end()); //std::random_shuffle is DEPRECATED
+	
+	BinarySearchTree moreBalancedBST(words[0]);
+
+	auto pRootOfBalanced = moreBalancedBST.getPRoot();
+	for (int i = 1; i < words.size(); ++i)
+	{
+		moreBalancedBST.addBSTNode(words[i], pRootOfBalanced);
+	}
+
+	std::cout << "The HEIGHT of the more balanced tree is: " << moreBalancedBST.getTreeHeight() << "\n";
+
+
+	/*The best boy (a self-balancing tree)*/
+	rbTree<int, std::string> redBlackTree; //NOT my implementation
+	for (int i = 0; i < words.size(); ++i)
+	{
+		redBlackTree.insert(i, words[i]);
+	}
+
+	std::cout << "The HEIGHT of the red-black tree is: " << redBlackTree.getTreeHeight() << "\n";
 }
 

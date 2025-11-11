@@ -90,13 +90,16 @@ public:
 /*Overrides its parent's `addNode` function*/
 class BinarySearchTree : public BinaryTree
 {
+private: 
+
 public:
 
 	BinarySearchTree(const std::string dataInTheRootNode);
 
 	/*
 	* NOTE: this function ASSUMES no duplicate node value is inserted!
-	@param dataToAdd -> if LESS than parent node, insert to the LEFT, else insert to the RIGHT*/
+	@param dataToAdd -> if LESS than parent node, insert to the LEFT, else insert to the RIGHT
+	@param pParent -> The client will (most always) be using pRoot here!)*/
 	BinaryTreeNode* addBSTNode(const std::string& dataToAdd, BinaryTreeNode* pParent);
 
 	/*@return the number of comparisons (for algorithm analysis purposes)*/
