@@ -37,7 +37,7 @@ class BinaryTree
 {
 protected: //protected gives access to CHILLUNS (BinarySearchTree will be a child of this class)
 	/*Member variable************************/
-	BinaryTreeNode* pRoot;
+	BinaryTreeNode* pRoot; 
 	//int numberOfNodesInTree; //this COULD prove worth the space it occupies if insisting on non-recursive traversal 
 public:
 

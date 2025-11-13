@@ -353,6 +353,7 @@ int BinarySearchTree::searchBST(const std::string& dataToFind)
 	//start the search at the root: 
 	auto pCurrent = pRoot;
 	bool found = false;
+
 	int comparisonCount = 0;
 
 	while (!found && pCurrent) //second condition longer form: pCurrent != nullptr
